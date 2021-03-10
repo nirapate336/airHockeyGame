@@ -204,7 +204,7 @@ namespace airHockeyGame
             {
                 if (ballXSpeed == 0)
                 {
-                    ballXSpeed = randGen.Next(-9, -5);
+                    ballXSpeed = randGen.Next(-10, -5);
                    
                 }
                 else
@@ -220,7 +220,7 @@ namespace airHockeyGame
             {
                 if (ballXSpeed == 0)
                 {
-                    ballXSpeed = randGen.Next (5,9); 
+                    ballXSpeed = randGen.Next (5,10); 
                 }
                 else
                 {
@@ -237,7 +237,7 @@ namespace airHockeyGame
             {
                if( ballXSpeed ==0)
                 {
-                    ballXSpeed = randGen.Next (-9,-5);
+                    ballXSpeed = randGen.Next (-10,-5);
                    
                 }
                else
@@ -256,7 +256,7 @@ namespace airHockeyGame
                 
                if(ballXSpeed==0)
                 {
-                    ballXSpeed = randGen.Next (5,9); 
+                    ballXSpeed = randGen.Next (5,10); 
                 }
                else
                 {
