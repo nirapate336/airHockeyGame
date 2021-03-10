@@ -12,8 +12,10 @@ using System.Media;
 
 namespace airHockeyGame
 {
+//Nirav Patel March 10 2021 -Air Hockey Game
     public partial class Form1 : Form
     {
+        //global variables
         int paddle1X = 50;
         int paddle1Y = 180;
         int player1Score = 0;
@@ -42,23 +44,20 @@ namespace airHockeyGame
         bool downArrowDown = false;
         bool leftArrowDown = false;
         bool rightArrowDown = false;
-
+        //drawing global tools
         Pen globalpen = new Pen(Color.Gray, 5);
-
         SolidBrush blueBrush = new SolidBrush(Color.DodgerBlue);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush redBrush = new SolidBrush(Color.Red);
-       
+       //soundplayer and random generators
         SoundPlayer hitSound1 = new SoundPlayer(Properties.Resources.puckhit);
         SoundPlayer goalSound = new SoundPlayer(Properties.Resources.cheer);
 
         Random randGen = new Random();
-
         public Form1()
         {
             InitializeComponent();
         }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -88,9 +87,7 @@ namespace airHockeyGame
                     rightArrowDown = true;
                     break;
             }
-
         }
-
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -126,12 +123,12 @@ namespace airHockeyGame
             //move ball 
             ballX += ballXSpeed;
             ballY += ballYSpeed;
+
             //move player 1 
             if (wDown == true && paddle1Y > 0)
             {
                 paddle1Y -= paddleSpeed;
             }
-
             if (sDown == true && paddle1Y < this.Height - paddleHeight)
             {
                 paddle1Y += paddleSpeed;
@@ -144,26 +141,26 @@ namespace airHockeyGame
             {
                 paddle1X += paddleSpeed;
             }
+
             //move player 2 
             if (upArrowDown == true && paddle2Y > 0)
             {
                 paddle2Y -= paddleSpeed;
             }
-
             if (downArrowDown == true && paddle2Y < this.Height - paddleHeight)
             {
                 paddle2Y += paddleSpeed;
             }
             if (leftArrowDown == true && paddle2X > 0)
             {
-
                 paddle2X -= paddleSpeed;
             }
             if (rightArrowDown == true && paddle2X < this.Width - paddleWidth)
             {
                 paddle2X += paddleSpeed;
             }
-            //check if ball hit top or bottom wall and change direction if it does 
+
+            //check if ball hit top or bottom wall
             if (ballY < 0 || ballY > this.Height - ballHeight)
             {
                 ballYSpeed *= -1;  // or: ballYSpeed = -ballYSpeed; 
@@ -176,7 +173,7 @@ namespace airHockeyGame
             Rectangle net1 = new Rectangle(579, 150, 20, 100);
             Rectangle net2 = new Rectangle(00, 150, 20, 100);
 
-            //check if ball went into net
+            //check if ball went into net and change score
             if (net1.IntersectsWith(ballRec))
             {
                 ballX = 285;
@@ -198,14 +195,13 @@ namespace airHockeyGame
                 goalSound.Play();
             }
           
-            //check if ball hits either paddle. If it does change the direction 
-            //and place the ball in front of the paddle hit 
+            //check if ball hits either paddle. Change direction, place ball infront of paddle,and play sound
+           
             if ( player2Rec.IntersectsWith(ballRec) && ballX > paddle2X)
             {
                 if (ballXSpeed == 0)
                 {
                     ballXSpeed = randGen.Next(-10, -5);
-                   
                 }
                 else
                 {
@@ -213,7 +209,6 @@ namespace airHockeyGame
                 }
                 ballX = paddle2X + paddleWidth + 1;
                 ballYSpeed = randGen.Next(1, 5);
-            
                 hitSound1.Play();
             }
             else if (player2Rec.IntersectsWith(ballRec)&& ballX <paddle2X)
@@ -225,35 +220,28 @@ namespace airHockeyGame
                 else
                 {
                     ballXSpeed *=  -1;
-
                 }
                 ballX = paddle2X - paddleWidth - 1;
                 ballYSpeed = randGen.Next(1, 5);
 
                 hitSound1.Play();
             }
-
              if (player1Rec.IntersectsWith(ballRec) && ballX<paddle1X)
             {
                if( ballXSpeed ==0)
                 {
                     ballXSpeed = randGen.Next (-10,-5);
-                   
                 }
                else
                 {
                     ballXSpeed *=  -1;
-
                 }
-
                 ballX = paddle1X - paddleWidth - 1;
                 hitSound1.Play();
                 ballYSpeed = randGen.Next(1, 5);
-
             }
             else if (player1Rec.IntersectsWith(ballRec) && ballX>paddle1X)
             {
-                
                if(ballXSpeed==0)
                 {
                     ballXSpeed = randGen.Next (5,10); 
@@ -261,15 +249,13 @@ namespace airHockeyGame
                else
                 {
                     ballXSpeed *= -1;
-                    
                 }
                 ballX = paddle1X + paddleWidth + 1;
                 hitSound1.Play();
                 ballYSpeed = randGen.Next(1, 5);
-
             }
 
-            //bounce off of side walls
+            //bounce off the side walls
             if (ballX <= 0)
             {
                 ballXSpeed *= -1;
@@ -282,7 +268,7 @@ namespace airHockeyGame
                 ballX = 550;
             }
            
-            // check score and stop game if either player is at 3 
+            // check score and stop game if either player is at 3 points
             if (player1Score == 3 || player2Score == 3)
             {
                 gameTimer.Enabled = false;
@@ -300,9 +286,11 @@ namespace airHockeyGame
                     p2ScoreLabel.Text = "";
                 }
             }
+
+            
+
             Refresh();
         }
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(globalpen, 579, 150, 20, 100);
@@ -312,7 +300,6 @@ namespace airHockeyGame
             e.Graphics.FillEllipse(blackBrush, ballX, ballY, ballWidth, ballHeight);
             e.Graphics.FillEllipse(redBrush, paddle1X, paddle1Y, paddleWidth, paddleHeight);
             e.Graphics.FillEllipse(blueBrush, paddle2X, paddle2Y, paddleWidth, paddleHeight);
-
         }
     }
 }
