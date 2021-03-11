@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 
-
+//Nirav Patel March 10 2021 -Air Hockey Game
 namespace airHockeyGame
 {
-//Nirav Patel March 10 2021 -Air Hockey Game
     public partial class Form1 : Form
     {
         //global variables
@@ -26,7 +25,7 @@ namespace airHockeyGame
 
         int paddleWidth = 60;
         int paddleHeight = 60;
-        int paddleSpeed = 4;
+        int paddleSpeed = 6;
 
         int ballX = 285;
         int ballY = 175;
@@ -53,7 +52,7 @@ namespace airHockeyGame
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush redBrush = new SolidBrush(Color.Red);
 
-       //soundplayer and random generators
+       //soundplayer and random generator
         SoundPlayer hitSound1 = new SoundPlayer(Properties.Resources.puckhit);
         SoundPlayer goalSound = new SoundPlayer(Properties.Resources.cheer2);
         SoundPlayer bounceSound = new SoundPlayer(Properties.Resources.bounce);
@@ -175,7 +174,7 @@ namespace airHockeyGame
             Rectangle player1Rec = new Rectangle (paddle1X, paddle1Y, paddleWidth, paddleHeight);
             Rectangle player2Rec = new Rectangle(paddle2X, paddle2Y, paddleWidth, paddleHeight);
             Rectangle ballRec = new Rectangle(ballX, ballY, ballWidth, ballHeight);
-            Rectangle net1 = new Rectangle(579, 150, 20, 100);
+            Rectangle net1 = new Rectangle(579,150, 20, 100);
             Rectangle net2 = new Rectangle(00, 150, 20, 100);
 
             //check if ball went into net and change score
@@ -301,6 +300,8 @@ namespace airHockeyGame
             e.Graphics.DrawRectangle(globalPen, 00, this.Height/2 -paddleHeight, ballWidth, 100);
             e.Graphics.DrawLine(globalPen, this.Width/2, 00, 300,400);
             e.Graphics.DrawEllipse(globalPen, 250, this.Height/2 - paddleHeight, 100,100 );
+            e.Graphics.DrawEllipse(globalPen, -150, 70 , 300, 250);
+            e.Graphics.DrawEllipse(globalPen, 450, 70, 300, 250);
             e.Graphics.FillEllipse(blackBrush, ballX, ballY, ballWidth, ballHeight);
             e.Graphics.FillEllipse(redBrush, paddle1X, paddle1Y, paddleWidth, paddleHeight);
             e.Graphics.DrawEllipse(player1Pen, paddle1X, paddle1Y, paddleWidth, paddleHeight);
