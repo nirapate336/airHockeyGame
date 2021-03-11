@@ -297,8 +297,8 @@ namespace airHockeyGame
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(globalPen, 579, this.Height/2 - paddleHeight, 20, 100);
-            e.Graphics.DrawRectangle(globalPen, 00, this.Height/2 - paddleHeight, 20, 100);
+            e.Graphics.DrawRectangle(globalPen, 570, this.Height/2- paddleHeight , ballWidth, 100);
+            e.Graphics.DrawRectangle(globalPen, 00, this.Height/2 -paddleHeight, ballWidth, 100);
             e.Graphics.DrawLine(globalPen, this.Width/2, 00, 300,400);
             e.Graphics.DrawEllipse(globalPen, 250, this.Height/2 - paddleHeight, 100,100 );
             e.Graphics.FillEllipse(blackBrush, ballX, ballY, ballWidth, ballHeight);
