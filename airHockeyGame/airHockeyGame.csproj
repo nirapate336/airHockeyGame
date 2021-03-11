@@ -92,5 +92,17 @@
   <ItemGroup>
     <None Include="Resources\433644__dersuperanton__game-over-sound %281%29.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redpaddle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\523088__magnuswaker__energy-bounce-1 %281%29.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\446136__justinvoke__jump-bounce.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\165491__chripei__victory-cry-reverb-2.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

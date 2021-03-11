@@ -17,11 +17,11 @@ namespace airHockeyGame
     {
         //global variables
         int paddle1X = 50;
-        int paddle1Y = 180;
+        int paddle1Y = 165;
         int player1Score = 0;
 
         int paddle2X = 500;
-        int paddle2Y = 180;
+        int paddle2Y = 165;
         int player2Score = 0;
 
         int paddleWidth = 60;
@@ -29,7 +29,7 @@ namespace airHockeyGame
         int paddleSpeed = 4;
 
         int ballX = 285;
-        int ballY = 200;
+        int ballY = 175;
         int ballXSpeed = 0;
         int ballYSpeed = 0;
         int ballWidth = 30;
@@ -44,15 +44,19 @@ namespace airHockeyGame
         bool downArrowDown = false;
         bool leftArrowDown = false;
         bool rightArrowDown = false;
+
         //drawing global tools
-        Pen globalpen = new Pen(Color.Gray, 5);
+        Pen globalPen = new Pen(Color.Gray, 5);
+        Pen player1Pen = new Pen(Color.DarkRed, 3);
+        Pen player2Pen = new Pen(Color.DarkBlue, 3);
         SolidBrush blueBrush = new SolidBrush(Color.DodgerBlue);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush redBrush = new SolidBrush(Color.Red);
+
        //soundplayer and random generators
         SoundPlayer hitSound1 = new SoundPlayer(Properties.Resources.puckhit);
-        SoundPlayer goalSound = new SoundPlayer(Properties.Resources.cheer);
-
+        SoundPlayer goalSound = new SoundPlayer(Properties.Resources.cheer2);
+        SoundPlayer bounceSound = new SoundPlayer(Properties.Resources.bounce);
         Random randGen = new Random();
         public Form1()
         {
@@ -137,7 +141,7 @@ namespace airHockeyGame
             {
                 paddle1X -= paddleSpeed;
             }
-            if (dDown == true && paddle1X < this.Width - paddleWidth)
+            if (dDown == true && paddle1X < this.Width/2-paddleWidth)
             {
                 paddle1X += paddleSpeed;
             }
@@ -151,7 +155,7 @@ namespace airHockeyGame
             {
                 paddle2Y += paddleSpeed;
             }
-            if (leftArrowDown == true && paddle2X > 0)
+            if (leftArrowDown == true && paddle2X > this.Width/2)
             {
                 paddle2X -= paddleSpeed;
             }
@@ -163,7 +167,8 @@ namespace airHockeyGame
             //check if ball hit top or bottom wall
             if (ballY < 0 || ballY > this.Height - ballHeight)
             {
-                ballYSpeed *= -1;  // or: ballYSpeed = -ballYSpeed; 
+                ballYSpeed *= -1;
+                bounceSound.Play();
             }
 
             //create Rectangles of objects on screen to be used for collision detection 
@@ -177,7 +182,7 @@ namespace airHockeyGame
             if (net1.IntersectsWith(ballRec))
             {
                 ballX = 285;
-                ballY = 200;
+                ballY = 175;
                 ballXSpeed = 0;
                 ballYSpeed = 0;
                 player1Score++;
@@ -187,7 +192,7 @@ namespace airHockeyGame
             if (net2.IntersectsWith(ballRec))
             {
                 ballX = 285;
-                ballY = 200;
+                ballY = 175;
                 ballXSpeed = 0;
                 ballYSpeed = 0;
                 player2Score++;
@@ -260,12 +265,14 @@ namespace airHockeyGame
             {
                 ballXSpeed *= -1;
                 ballX = 0;
+                bounceSound.Play();
             }
           
             else if (ballX >= 550 )
             {
                 ballXSpeed *= -1;
                 ballX = 550;
+                bounceSound.Play();
             }
            
             // check score and stop game if either player is at 3 points
@@ -277,29 +284,28 @@ namespace airHockeyGame
 
                 if(player1Score==3)
                 {
-                    p1ScoreLabel.Text = "Player 1 wins!";
+                    p1ScoreLabel.Text = "Player 1 Wins!";
                     p2ScoreLabel.Text = "";
                 }
                 else if (player2Score==3)
                 {
-                    p1ScoreLabel.Text = "Player 2 wins!";
+                    p1ScoreLabel.Text = "Player 2 Wins!";
                     p2ScoreLabel.Text = "";
                 }
             }
-
-            
-
             Refresh();
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(globalpen, 579, 150, 20, 100);
-            e.Graphics.DrawRectangle(globalpen, 00, 150, 20, 100);
-            e.Graphics.DrawLine(globalpen, 300, 00, 300,400);
-            e.Graphics.DrawEllipse(globalpen, 250, 165, 100,100 );
+            e.Graphics.DrawRectangle(globalPen, 579, this.Height/2 - paddleHeight, 20, 100);
+            e.Graphics.DrawRectangle(globalPen, 00, this.Height/2 - paddleHeight, 20, 100);
+            e.Graphics.DrawLine(globalPen, this.Width/2, 00, 300,400);
+            e.Graphics.DrawEllipse(globalPen, 250, this.Height/2 - paddleHeight, 100,100 );
             e.Graphics.FillEllipse(blackBrush, ballX, ballY, ballWidth, ballHeight);
             e.Graphics.FillEllipse(redBrush, paddle1X, paddle1Y, paddleWidth, paddleHeight);
+            e.Graphics.DrawEllipse(player1Pen, paddle1X, paddle1Y, paddleWidth, paddleHeight);
             e.Graphics.FillEllipse(blueBrush, paddle2X, paddle2Y, paddleWidth, paddleHeight);
+            e.Graphics.DrawEllipse(player2Pen, paddle2X, paddle2Y, paddleWidth, paddleHeight);
         }
     }
 }

@@ -63,9 +63,27 @@ namespace airHockeyGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream bounce {
+            get {
+                return ResourceManager.GetStream("bounce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream cheer {
             get {
                 return ResourceManager.GetStream("cheer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream cheer2 {
+            get {
+                return ResourceManager.GetStream("cheer2", resourceCulture);
             }
         }
         
@@ -93,6 +111,16 @@ namespace airHockeyGame.Properties {
         internal static System.IO.UnmanagedMemoryStream puckhit {
             get {
                 return ResourceManager.GetStream("puckhit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap redpaddle {
+            get {
+                object obj = ResourceManager.GetObject("redpaddle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
